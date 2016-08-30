@@ -1,0 +1,55 @@
+{
+	"title": "json-tape",
+	"definitions": {
+		"directory": {
+			"description": "Object representing a directory",
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "Name of the directory",
+					"type": "string"
+				},
+				"kind": {
+					"enum": ["directory"]
+				},
+				"content": {
+					"description": "List of files and directories contained in the directory",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/object"
+					}
+				}
+			},
+			"required": ["name", "kind", "content"]
+		},
+		"file": {
+			"description": "Object representing a file",
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"kind": {
+					"enum": ["file"]
+				},
+				"content": {
+					"description": "Content of the file, base64 encoded",
+					"type": "string"
+				}
+			},
+			"required": ["name", "kind", "content"]
+		},
+		"object": {
+			"description": "Either file or a directory",
+			"oneOf": [
+				{
+					"$ref": "#/definitions/directory"
+				},
+				{
+					"$ref": "#/definitions/file"
+				}
+			]
+		}
+	},
+	"$ref": "#/definitions/object"
+}
