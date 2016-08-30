@@ -1,0 +1,39 @@
+name: json-tape
+version: 1.0.0
+synopsis: Serialisation of directory trees into JSON
+description:
+ This library abuses JSON to serialise a directory structure so that it could be easily deserialised in JavaScript (browser environment).
+homepage: https://github.com/jtojnar/json-tape#readme
+license: MIT
+license-file: LICENSE
+author: Jan Tojnar
+maintainer: jtojnar@gmail.com
+copyright: 2016 Jan Tojnar
+category: Codec
+build-type: Simple
+cabal-version: >=1.10
+
+library
+ hs-source-dirs: src
+ exposed-modules: Codec.JsonTape
+ build-depends: aeson >= 0.11 && < 1.0, base >= 4.7 && < 5, bytestring >= 0.10 && < 0.11, base64-bytestring-type, directory-tree >= 0.12 && < 0.13, text >= 1.2 && < 1.3
+ default-language: Haskell2010
+
+executable json-tape
+ hs-source-dirs: app
+ main-is: Main.hs
+ other-modules: Options
+ build-depends: base, base64-bytestring-type, directory >= 1.2 && < 1.3, directory-tree >= 0.12 && < 0.13, filepath >= 1.4.1 && < 1.5, json-tape
+ default-language: Haskell2010
+
+test-suite json-tape-test
+ type: exitcode-stdio-1.0
+ hs-source-dirs: test
+ main-is: Spec.hs
+ build-depends: base, base64-bytestring-type, directory-tree >= 0.12 && < 0.13, HUnit >= 1.2 && < 2, json-tape
+ ghc-options: -threaded -rtsopts -with-rtsopts=-N
+ default-language: Haskell2010
+
+source-repository head
+ type: git
+ location: https://github.com/jtojnar/json-tape
